@@ -1,11 +1,12 @@
 import  mongoose from "mongoose";
-import app from "./app";
+import app from "./src/app.js";
+import config from "./src/config/index.js";
 
 // ifi -- self envoking function
 
 (async()=> {
  try{
-     await mongoose.connect("mongodb://localhost:27017/ecomm")
+     await mongoose.connect("config.MONGODB_URL")
      console.log("DB connected!");
     // must have event
      app.on('error', (err)=> {
@@ -14,7 +15,7 @@ import app from "./app";
 
     })
     const onListening = () =>{
-        console.log(`Listening on port 5000`);
+        console.log(`Listening on port ${config.PORT}`);
     }
 
     app.listen(5000, onListening )
